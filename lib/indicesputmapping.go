@@ -29,6 +29,7 @@ type MappingOptions struct {
 	Size       *SizeOptions           `json:"_size,omitempty"`
 	Source     *SourceOptions         `json:"_source,omitempty"`
 	Type       *TypeOptions           `json:"_type,omitempty"`
+	Transform  []TransformOption      `json:"transform,omitempty"`
 	Properties map[string]interface{} `json:"properties"`
 }
 
@@ -69,6 +70,12 @@ type TypeOptions struct {
 type IdOptions struct {
 	Index string `json:"index,omitempty"`
 	Path  string `json:"path,omitempty"`
+}
+
+type TransformOption struct {
+	Script string                 `json:"script"`
+	Params map[string]interface{} `json:"params,omitempty"`
+	Lang   string                 `json:"lang,omitempty"`
 }
 
 func (m_ Mapping) Options() MappingOptions {
