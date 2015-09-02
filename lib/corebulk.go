@@ -394,9 +394,9 @@ func WriteBulkBytes(op string, index string, _type string, id, parent, ttl strin
 		buf.WriteString(strconv.FormatInt(date.UnixNano()/1e6, 10))
 		buf.WriteString(`"`)
 	}
-	if refresh {
+	/*if refresh {
 		buf.WriteString(`,"refresh":true`)
-	}
+	}*/
 	buf.WriteString(`}}`)
 	buf.WriteRune('\n')
 	//buf.WriteByte('\n')
