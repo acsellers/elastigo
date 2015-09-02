@@ -25,12 +25,13 @@ type JsonAliasAdd struct {
 }
 
 type JsonAlias struct {
-	Index string `json:"index"`
-	Alias string `json:"alias"`
+	Index  string      `json:"index"`
+	Alias  string      `json:"alias"`
+	Filter interface{} `json:"filter"`
 }
 
 // The API allows you to create an index alias through an API.
-func (c *Conn) AddAlias(index string, alias string) (BaseResponse, error) {
+func (c *Conn) AddAlias(index, alias string, filter ...interface{}) (BaseResponse, error) {
 	var url string
 	var retval BaseResponse
 
@@ -44,6 +45,9 @@ func (c *Conn) AddAlias(index string, alias string) (BaseResponse, error) {
 	jsonAliasAdd := JsonAliasAdd{}
 	jsonAliasAdd.Add.Alias = alias
 	jsonAliasAdd.Add.Index = index
+	if len(filter) > 0 {
+		jsonAliasAdd.Add.Filter = filter[0]
+	}
 	jsonAliases.Actions = append(jsonAliases.Actions, jsonAliasAdd)
 	requestBody, err := json.Marshal(jsonAliases)
 
