@@ -30,6 +30,7 @@ type MappingOptions struct {
 	Source     *SourceOptions         `json:"_source,omitempty"`
 	TTL        *TTLOptions            `json:"_ttl,omitempty"`
 	Type       *TypeOptions           `json:"_type,omitempty"`
+	Transform  []TransformOption      `json:"transform,omitempty"`
 	Properties map[string]interface{} `json:"properties"`
 }
 
@@ -75,6 +76,12 @@ type TTLOptions struct {
 type IdOptions struct {
 	Index string `json:"index,omitempty"`
 	Path  string `json:"path,omitempty"`
+}
+
+type TransformOption struct {
+	Script string                 `json:"script"`
+	Params map[string]interface{} `json:"params,omitempty"`
+	Lang   string                 `json:"lang,omitempty"`
 }
 
 func (m_ Mapping) Options() MappingOptions {
